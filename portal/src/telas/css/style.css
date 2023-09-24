@@ -1,0 +1,53 @@
+/* Estilos para a página de criação de conta */
+
+
+
+body {
+  background-color: #f2f2f2;
+  font-family: Arial, sans-serif;
+  justify-content: space-between;
+  display: flex;
+}
+
+.create-account-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  margin: 20px auto;
+  max-width: 400px; 
+}
+
+h1 {
+  margin-top: 0;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+input {
+  width: 95%;
+  padding: 10px;
+  margin-bottom: 20px;
+  margin-right: 20px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+
+
+button:hover {
+  background-color: #0056b3;
+}
