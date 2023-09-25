@@ -10,9 +10,9 @@ import java.util.List;
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
     @Query(nativeQuery = true, value = """
-				SELECT tb_usuario.username AS username, tb_usuario.senha, tb_role.id AS roleId, tb_role.authority
+				SELECT tb_usuario.username AS username, tb_usuario.password, tb_role.id AS roleId, tb_role.authority
 				FROM tb_usuario
-				INNER JOIN tb_usuario_role ON tb_usuario.id = tb_usuario_role.user_id
+				INNER JOIN tb_usuario_role ON tb_usuario.id = tb_usuario_role.usuario_id
 				INNER JOIN tb_role ON tb_role.id = tb_usuario_role.role_id
 				WHERE tb_usuario.username = :username
 			""")

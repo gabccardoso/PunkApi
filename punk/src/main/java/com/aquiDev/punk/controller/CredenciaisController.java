@@ -32,7 +32,7 @@ public class CredenciaisController {
         ObjectMapper objectMapper = new ObjectMapper();
         Map<String, String> credenciais = new HashMap<>();
         credenciais.put("clientId", clientId);
-        credenciais.put("clentSecret", clientSecret);
+        credenciais.put("clientSecret", clientSecret);
         String credenciaisString = objectMapper.writeValueAsString(credenciais);
         return ResponseEntity.ok(credenciaisString);
     }

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,7 +30,7 @@ public class UsuarioService implements UserDetailsService {
         Usuario usuario = new Usuario();
         Role role = roleRepository.getReferenceById(1L);
         usuario.setUsername(novoUsuarioDTO.getUsername());
-        usuario.setSenha(novoUsuarioDTO.getSenha());
+        usuario.setPassword(novoUsuarioDTO.getpassword());
         usuario.addRole(role);
         usuarioRepository.save(usuario);
         return usuario.getUsername();
@@ -37,10 +38,14 @@ public class UsuarioService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        List<UserDetailsProjection> usuario = usuarioRepository.searchUserAndRolesByUsername(username);
-        if(usuario == null){
+        List<UserDetailsProjection> result = usuarioRepository.searchUserAndRolesByUsername(username);
+        if(result == null){
             throw new UsernameNotFoundException("Usuário não encontrado");
         }
-        return (UserDetails) usuario;
+        Usuario usuario = new Usuario();
+        usuario.setUsername(result.get(0).getUsername());
+        usuario.setPassword(result.get(0).getPassword());
+        usuario.addRole(new Role(result.get(0).getRoleId(), result.get(0).getAuthority()));
+        return usuario;
     }
 }

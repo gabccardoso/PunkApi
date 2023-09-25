@@ -6,7 +6,7 @@ public class UsuarioDTO {
 
     private String username;
 
-    private String senha;
+    private String password;
 
     public UsuarioDTO() {
     }
@@ -14,7 +14,7 @@ public class UsuarioDTO {
     public UsuarioDTO createDTO(Usuario usuario){
         UsuarioDTO usuarioDTO = new UsuarioDTO();
         usuarioDTO.setUsername(usuario.getUsername());
-        usuarioDTO.setSenha(usuario.getSenha());
+        usuarioDTO.setpassword(usuario.getPassword());
         return usuarioDTO;
     }
 
@@ -26,11 +26,11 @@ public class UsuarioDTO {
         this.username = username;
     }
 
-    public String getSenha() {
-        return senha;
+    public String getpassword() {
+        return password;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setpassword(String password) {
+        this.password = password;
     }
 }

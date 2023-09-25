@@ -5,23 +5,23 @@ import { montaAuthentication } from './config/credenciais.js';
 
 const URL_LOGIN = "http://localhost:8080/oauth2/token";
 
-function handleLoginForm(event) {
+async function handleLoginForm(event) {
   event.preventDefault();
-  const credenciais = montaAuthentication();
-  const username = document.getElementById("username");
-  const senha = document.getElementById("senha");
+  const credenciais = await montaAuthentication();
+  const username = document.getElementById("username").value;
+  const senha = document.getElementById("password").value;
   fazLogin(credenciais, username, senha);
 }
 
-function fazLogin(credenciais, username, senha){
+async function fazLogin(credenciais, username, senha){
   const data = new URLSearchParams();
   data.append('username',username);
-  data.append('senha', senha);
-  fetch(URL_LOGIN, {
+  data.append('password', senha);
+  data.append('grant_type', 'password');
+  await fetch(URL_LOGIN, {
     method: "POST",
     body: data,
     headers: {
-      "Content-Type": "x-www-form-urlencoded",
       "Authorization": credenciais
     }
   })
@@ -30,7 +30,7 @@ function fazLogin(credenciais, username, senha){
         alert("funcionou");
       }
       else{
-        alert("Erro ao criar conta. Tente novamente.");
+        alert("Erro ao fazer login. Tente novamente.");
       }
     });
 }

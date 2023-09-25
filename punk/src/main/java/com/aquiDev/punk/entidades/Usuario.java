@@ -16,7 +16,7 @@ public class Usuario implements UserDetails {
     private Long id;
     @Column(unique = true)
     private String username;
-    private String senha;
+    private String password;
     @ManyToMany
     @JoinTable(name = "tb_usuario_role",
             joinColumns = @JoinColumn(name = "usuario_id"),
@@ -26,10 +26,10 @@ public class Usuario implements UserDetails {
     public Usuario() {
     }
 
-    public Usuario(Long id, String username, String senha) {
+    public Usuario(Long id, String username, String password) {
         this.id = id;
         this.username = username;
-        this.senha = senha;
+        this.password = password;
     }
 
     public Long getId() {
@@ -44,12 +44,8 @@ public class Usuario implements UserDetails {
         this.username = username;
     }
 
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Set<Role> getRoles() {
@@ -58,7 +54,7 @@ public class Usuario implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return roles;
     }
 
     public void addRole(Role role) {
@@ -76,7 +72,7 @@ public class Usuario implements UserDetails {
 
     @Override
     public String getPassword() {
-        return senha;
+        return password;
     }
 
     public String getUsername() {

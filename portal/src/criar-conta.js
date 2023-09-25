@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let data = JSON.stringify({
       username: username,
-      senha: senha
+      password: senha
     });
 
     if(senha != confirmaSenha){alert("As senhas devem ser iguais. Tente novamente.");}

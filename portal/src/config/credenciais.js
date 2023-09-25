@@ -9,8 +9,8 @@ async function getCredenciais() {
   return credentiais;
 }
 
-function montaAuthentication(){
-  const credenciais = getCredenciais();
+async function montaAuthentication(){
+  const credenciais = await getCredenciais();
   const clientId = credenciais.clientId;
   const clientSecret = credenciais.clientSecret;
   const authString = `${clientId}:${clientSecret}`;
