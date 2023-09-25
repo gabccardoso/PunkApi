@@ -18,21 +18,27 @@ async function fazLogin(credenciais, username, senha){
   data.append('username',username);
   data.append('password', senha);
   data.append('grant_type', 'password');
-  await fetch(URL_LOGIN, {
+  const response = await fetch(URL_LOGIN, {
     method: "POST",
     body: data,
     headers: {
       "Authorization": credenciais
     }
-  })
-    .then((response) => {
-      if (response.ok) {
-        alert("funcionou");
-      }
-      else{
-        alert("Erro ao fazer login. Tente novamente.");
-      }
-    });
+  });
+  if (response.ok) {
+    const responseJson = await response.json();
+    const token = responseJson.access_token;
+    
+    if (token) {
+      document.cookie = `token=${token}`;
+      window.location.href = './telas/punk-Api.html';
+    } else {
+      alert("Token vazio. Erro ao fazer login. Tente novamente.");
+    }
+  } else {
+    alert("Erro ao fazer login. Tente novamente.");
+  }
+    
 }
   
 window.addEventListener("load", function() {
